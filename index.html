@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Licencias"><meta name="theme-color" content="#1f4fd8"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png">
+<title>AGRIMENSURA PRO - Generador de licencias</title>
+<style>
+:root{color-scheme:light dark;--bg:#f4f5f8;--card:#fff;--ink:#14161c;--mut:#667085;--line:#e3e6ee;--acc:#1f4fd8;--acc2:#e8eefc;--ok:#127a46;--okb:#e3f6ec;--wa:#9a5b00;--wab:#fff1d6;--er:#b42318;--erb:#fde8e6;--ga:#475467;--gab:#eceef3;--r:14px}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#171b24;--ink:#eef0f5;--mut:#98a2b3;--line:#272d3a;--acc:#6f93ff;--acc2:#1d2a4d;--ok:#5dd39e;--okb:#10302a;--wa:#f5c36b;--wab:#3a2c10;--er:#ff8a80;--erb:#3d1a18;--ga:#b0b8c8;--gab:#262c39}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.logo{width:92px;height:60px;flex:none;color:var(--ink)}
+.ttl{flex:1;min-width:220px}
+.ttl h1{margin:0;font-size:21px;letter-spacing:.2px;font-weight:650}
+.ttl p{margin:2px 0 0;color:var(--mut);font-size:13px}
+.bar{height:4px;border-radius:4px;background:var(--acc);margin:0 0 18px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer}
+.btn:hover{border-color:var(--acc)}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.btn.s{padding:5px 10px;font-size:13px}
+.btn.d:hover{border-color:var(--er);color:var(--er)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.stat b{display:block;font-size:26px;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--mut)}
+.stat.on{border-color:var(--acc);background:var(--acc2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:16px}
+.card h2{margin:0 0 12px;font-size:16px;font-weight:650}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12.5px;color:var(--mut);margin-bottom:4px}
+input,select,textarea{width:100%;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:0}
+.full{grid-column:1/-1}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:3px 10px;border-radius:99px;font-size:12.5px;cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.err{color:var(--er);font-size:13px;min-height:18px;margin-top:8px}
+.res{display:none;border:1px solid var(--acc);background:var(--acc2);border-radius:var(--r);padding:14px;margin-top:12px}
+.res.show{display:block}
+.kv{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0}
+.kv small{color:var(--mut);width:70px}
+.mono{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:15px;word-break:break-all;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 9px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.tools input{max-width:260px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.nm{font-weight:600}.nt{font-size:12.5px;color:var(--mut)}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--okb);color:var(--ok)}.b-wa{background:var(--wab);color:var(--wa)}.b-er{background:var(--erb);color:var(--er)}.b-ga{background:var(--gab);color:var(--ga)}
+.act{display:flex;gap:6px;flex-wrap:wrap}
+.empty{text-align:center;color:var(--mut);padding:26px 10px}
+.hint{font-size:12.5px;color:var(--mut);margin-top:10px}
+dialog{border:1px solid var(--line);border-radius:var(--r);background:var(--card);color:var(--ink);padding:18px;max-width:380px;width:92%}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(max-width:640px){.logo{width:56px;height:37px}table,tbody,tr,td{display:block;min-width:0}thead{display:none}tr{border-bottom:1px solid var(--line);padding:10px 0}td{border:0;padding:3px 0}.btn.s{padding:8px 12px}.tw{overflow:visible}}
+#lock{position:fixed;inset:0;background:var(--bg);z-index:99;display:flex;align-items:center;justify-content:center;padding:16px}
+#lock .card{max-width:360px;width:100%;margin:0}#lock p{color:var(--mut);font-size:13px;margin:0 0 12px}
+#lock label.ck{display:flex;gap:8px;align-items:center;margin:10px 0;font-size:13px}#lock label.ck input{width:auto}
+</style>
+</head>
+<body>
+<div id="lock"><div class="card"><h2>AGRIMENSURA PRO</h2><p>Generador de licencias. Ingres&aacute; tu contrase&ntilde;a de acceso.</p>
+<input id="lp" type="password" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" autocapitalize="characters">
+<label class="ck"><input type="checkbox" id="lr" checked> Recordar en este dispositivo</label>
+<div class="err" id="le"></div><button class="btn p" id="lb" style="width:100%">Entrar</button></div></div>
+<div class="wrap">
+<header>
+<svg class="logo" viewBox="0 0 140 92" role="img" aria-label="Logo AGRIMENSURA PRO"><path fill="currentColor" d="M45 0h4v9h-4zM123 1h2v8h-2zM122 10h4v1h-4zM42 10h11v1h-11zM41 11h12v1h-12zM56 11h1v1h-1zM121 11h7v1h-7zM120 12h9v1h-9zM56 12h2v1h-2zM40 12h14v2h-14zM57 13h2v1h-2zM119 13h10v1h-10zM57 14h3v1h-3zM39 14h16v2h-16zM58 15h3v1h-3zM131 15h9v2h-9zM106 15h11v2h-11zM58 16h5v1h-5zM119 14h11v4h-11zM38 16h18v2h-18zM59 17h5v1h-5zM119 18h10v1h-10zM59 18h6v1h-6zM48 18h9v2h-9zM37 18h9v2h-9zM120 19h8v1h-8zM60 19h6v1h-6zM121 20h6v1h-6zM61 20h6v1h-6zM49 20h9v2h-9zM36 20h9v2h-9zM61 21h7v1h-7zM119 21h1v1h-1zM62 22h7v1h-7zM126 22h1v1h-1zM119 22h3v1h-3zM50 22h9v2h-9zM35 22h9v2h-9zM62 23h8v1h-8zM63 24h8v1h-8zM34 24h9v2h-9zM51 24h9v2h-9zM63 25h9v1h-9zM64 26h10v1h-10zM52 26h9v1h-9zM33 26h9v2h-9zM64 27h11v1h-11zM52 27h10v1h-10zM32 28h9v1h-9zM65 28h11v1h-11zM53 28h9v1h-9zM53 29h10v1h-10zM65 29h12v1h-12zM31 29h10v1h-10zM66 30h12v1h-12zM54 30h9v1h-9zM31 30h9v1h-9zM66 31h13v1h-13zM54 31h10v1h-10zM30 31h9v2h-9zM67 32h13v1h-13zM55 32h9v1h-9zM67 33h14v1h-14zM56 33h9v2h-9zM29 33h9v2h-9zM68 34h14v1h-14zM68 35h15v1h-15zM28 35h9v2h-9zM57 35h9v2h-9zM69 36h15v1h-15zM46 32h2v6h-2zM69 37h16v1h-16zM58 37h9v2h-9zM27 37h9v2h-9zM70 38h16v1h-16zM44 38h6v1h-6zM42 39h9v1h-9zM70 39h17v1h-17zM59 39h9v2h-9zM26 39h9v2h-9zM71 40h17v1h-17zM41 40h11v1h-11zM71 41h18v1h-18zM41 41h12v1h-12zM25 41h9v2h-9zM60 41h9v2h-9zM78 42h12v1h-12zM72 42h5v2h-5zM24 43h9v1h-9zM79 43h12v1h-12zM61 43h9v2h-9zM23 44h10v1h-10zM80 44h12v1h-12zM35 44h4v2h-4zM73 44h4v2h-4zM55 44h4v2h-4zM23 45h9v1h-9zM81 45h12v1h-12zM40 42h14v5h-14zM62 45h9v2h-9zM82 46h12v1h-12zM22 46h10v1h-10zM74 46h3v2h-3zM40 47h13v1h-13zM83 47h12v1h-12zM22 47h9v1h-9zM63 47h9v2h-9zM21 48h10v1h-10zM84 48h12v1h-12zM41 48h12v1h-12zM75 48h2v2h-2zM42 49h10v1h-10zM21 49h9v1h-9zM85 49h12v1h-12zM64 49h9v2h-9zM43 50h8v1h-8zM20 50h10v1h-10zM86 50h12v1h-12zM76 50h1v2h-1zM45 51h4v1h-4zM87 51h12v1h-12zM20 51h9v1h-9zM65 51h9v2h-9zM19 52h10v1h-10zM88 52h12v1h-12zM19 53h9v1h-9zM89 53h12v1h-12zM66 53h9v2h-9zM18 54h10v1h-10zM90 54h12v1h-12zM18 55h9v1h-9zM91 55h12v1h-12zM46 52h2v5h-2zM67 55h9v2h-9zM17 56h10v1h-10zM92 56h12v1h-12zM93 57h12v1h-12zM67 57h10v1h-10zM17 57h9v1h-9zM16 58h10v1h-10zM68 58h9v1h-9zM94 58h12v1h-12zM38 57h17v3h-17zM68 59h10v1h-10zM95 59h12v1h-12zM15 59h10v2h-10zM69 60h9v1h-9zM39 60h16v1h-16zM96 60h12v1h-12zM69 61h10v1h-10zM97 61h12v1h-12zM14 61h10v2h-10zM70 62h9v1h-9zM51 62h3v1h-3zM98 62h12v1h-12zM39 62h4v2h-4zM70 63h10v1h-10zM99 63h12v1h-12zM13 63h10v2h-10zM51 63h4v2h-4zM71 64h9v1h-9zM100 64h12v1h-12zM38 64h5v2h-5zM71 65h10v1h-10zM101 65h12v1h-12zM12 65h10v2h-10zM51 65h5v2h-5zM102 66h12v1h-12zM38 66h4v1h-4zM72 66h9v1h-9zM103 67h12v1h-12zM72 67h10v1h-10zM37 67h5v1h-5zM11 67h10v2h-10zM52 67h5v2h-5zM73 68h9v1h-9zM104 68h12v1h-12zM37 68h4v1h-4zM73 69h10v1h-10zM105 69h12v1h-12zM36 69h5v1h-5zM119 23h8v48h-8zM53 69h5v2h-5zM10 69h10v2h-10zM36 70h4v1h-4zM74 70h9v1h-9zM106 70h12v1h-12zM107 71h20v1h-20zM74 71h10v1h-10zM35 71h5v1h-5zM9 71h10v2h-10zM54 71h5v2h-5zM35 72h4v1h-4zM108 72h19v1h-19zM75 72h9v1h-9zM75 73h10v1h-10zM8 73h10v1h-10zM55 73h4v1h-4zM109 73h18v1h-18zM34 73h5v1h-5zM34 74h4v1h-4zM55 74h5v1h-5zM110 74h17v1h-17zM76 74h9v1h-9zM7 74h11v1h-11zM56 75h4v1h-4zM7 75h10v1h-10zM111 75h16v1h-16zM33 75h5v1h-5zM76 75h10v2h-10zM6 76h11v1h-11zM112 76h15v1h-15zM56 76h5v1h-5zM33 76h4v1h-4zM32 77h5v1h-5zM57 77h4v1h-4zM6 77h10v1h-10zM113 77h14v1h-14zM77 77h10v2h-10zM5 78h11v1h-11zM32 78h4v1h-4zM114 78h13v1h-13zM57 78h5v1h-5zM58 79h4v1h-4zM5 79h10v1h-10zM115 79h12v1h-12zM31 79h5v2h-5zM78 79h10v2h-10zM4 80h11v1h-11zM116 80h11v1h-11zM58 80h5v2h-5zM4 81h10v1h-10zM117 81h10v1h-10zM79 81h10v2h-10zM30 81h5v2h-5zM118 82h9v1h-9zM3 82h11v1h-11zM59 82h5v2h-5zM3 83h10v1h-10zM119 83h5v1h-5zM80 83h10v2h-10zM29 83h5v2h-5zM120 84h3v1h-3zM2 84h11v1h-11zM125 84h4v1h-4zM60 84h5v2h-5zM2 85h10v1h-10zM124 85h6v1h-6zM121 85h1v1h-1zM28 85h5v2h-5zM1 86h11v1h-11zM61 86h5v1h-5zM1 87h10v1h-10zM61 87h60v1h-60zM45 61h4v28h-4zM27 87h5v2h-5zM62 88h60v1h-60zM0 88h11v1h-11zM123 86h8v4h-8zM124 90h6v1h-6zM125 91h4v1h-4z"/></svg>
+<div class="ttl"><h1>AGRIMENSURA PRO &middot; Generador de licencias</h1><p>Genera la clave (definitiva o de prueba) de cada persona y lleva el control de quien esta activo e inactivo.</p></div>
+<button class="btn" id="bExp">Guardar copia</button>
+<button class="btn" id="bImp">Cargar copia</button>
+<input type="file" id="fImp" accept=".json,application/json" hidden>
+</header>
+<div class="bar"></div>
+
+<div class="stats" id="stats"></div>
+
+<div class="card">
+<h2>Nueva licencia</h2>
+<div class="grid">
+<div><label for="u">Usuario (nombre de la persona)</label><input id="u" maxlength="40" placeholder="Ej: JUAN PEREZ" autocomplete="off"></div>
+<div><label for="p">Programa</label><select id="p"><option value="D">Definitivo (programa completo)</option><option value="P">De prueba (v93-PRUEBA)</option></select></div>
+<div><label for="t">Tipo de licencia</label><select id="t"><option value="L">Libre (sirve en cualquier PC)</option><option value="E">Atada a un equipo</option></select></div>
+<div id="eqw" style="display:none"><label for="eq">ID del equipo (lo ve la persona en la ventana LIC)</label><input id="eq" maxlength="13" placeholder="XXXXXX-XXXXXX" autocomplete="off"></div>
+<div><label for="f">Vence el</label><input type="date" id="f"><div class="quick" id="quick"><span class="chip" data-dd="7">7 d&iacute;as</span><span class="chip" data-dd="15">15 d&iacute;as</span><span class="chip" data-dd="30">30 d&iacute;as</span><span class="chip" data-m="1">+1 mes</span><span class="chip" data-m="3">+3 meses</span><span class="chip" data-m="6">+6 meses</span><span class="chip" data-m="12">+1 a&ntilde;o</span></div></div>
+<div class="full"><label for="n">Nota (telefono, de quien es, etc. - opcional)</label><input id="n" maxlength="80" autocomplete="off"></div>
+</div>
+<div class="err" id="err"></div>
+<button class="btn p" id="bGen">Generar licencia</button>
+<div class="res" id="res">
+<div class="kv"><small>Usuario</small><span class="mono" id="rU"></span><button class="btn s" data-copy="rU">Copiar</button></div>
+<div class="kv"><small>Clave</small><span class="mono" id="rC"></span><button class="btn s" data-copy="rC">Copiar</button></div>
+<div class="kv"><small>Vence</small><span id="rV"></span></div>
+<div style="margin-top:8px"><button class="btn s" id="bMsg">Copiar mensaje para enviar</button> <span class="nt" id="msgOk"></span></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Licencias entregadas</h2>
+<div class="tools"><input id="q" placeholder="Buscar por usuario o nota"><span class="nt" id="cnt"></span></div>
+<div class="tw"><table><thead><tr><th>Usuario</th><th>Tipo</th><th>Vence</th><th>Estado</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="hint"><b>Importante:</b> el programa funciona sin internet, asi que "Inactiva" es una marca tuya para llevar el control: la licencia deja de andar sola en la fecha de vencimiento. Para cortar a alguien, no le renueves; por eso conviene dar vencimientos cortos. Los datos se guardan en este iPhone: usá "Guardar copia" de vez en cuando.</p>
+</div>
+</div>
+
+<dialog id="dRen"><h2 style="margin:0 0 10px;font-size:16px">Renovar licencia</h2><p class="nt" id="rnU" style="margin:0 0 10px"></p>
+<label for="rnF">Nuevo vencimiento</label><input type="date" id="rnF"><div class="quick" id="quick2"><span class="chip" data-dd="7">7 d&iacute;as</span><span class="chip" data-dd="15">15 d&iacute;as</span><span class="chip" data-dd="30">30 d&iacute;as</span><span class="chip" data-m="1">+1 mes</span><span class="chip" data-m="3">+3 meses</span><span class="chip" data-m="6">+6 meses</span><span class="chip" data-m="12">+1 a&ntilde;o</span></div>
+<div class="err" id="rnE"></div>
+<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn" id="rnC">Cancelar</button><button class="btn p" id="rnOk">Renovar</button></div></dialog>
+
+<script>
+"use strict";
+var SECRET="",SECRET_T="";
+var BLOB={s:"uSkXR9MU8iaQlZHQC0N6xQ==",i:"ojzJiPATtV8zwBaU",c:"Q+fRvp1Vw2exLGLdaqEh5pCAwM/dHn34jUWCkiaPlB3qrk4vKHbx+qE3NIrjJPxZhyWHgYR+P+iSHHXIULoVL9sadtsEhjVX3ISqogdhXGzq3klY60ZUpYOaTEt+VnAYWxVZCUsJx2nVJf9iBBqGWlW/",n:300000};
+var SKEY="agrimensura_pro_sec_v1";
+var ALF="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+var KEY="agrimensura_pro_licencias_v1";
+function b32(v){var s="",i;for(i=0;i<6;i++){s=ALF.charAt(v%32)+s;v=Math.floor(v/32);}return s;}
+function hash(s){var h=[7,13,17,19],b=[31,131,257,37],m=[1000000007,998244353,1000000009,999999937],i,k;
+for(i=0;i<s.length;i++){var c=s.charCodeAt(i);for(k=0;k<4;k++)h[k]=(h[k]*b[k]+c)%m[k];}
+return h.map(b32);}
+function firma(user,exp,mode,id,tipo){var l=hash((tipo==="P"?SECRET_T:SECRET)+"|"+user+"|"+exp+"|"+mode+"|"+id);return l[0]+"-"+l[1]+"-"+l[2];}
+function clave(user,exp,mode,eq,tipo){return mode+"-"+firma(user,exp,mode,mode==="E"?eq:"*",tipo)+"-"+exp;}
+function $(i){return document.getElementById(i);}
+function pad(n){return (n<10?"0":"")+n;}
+function ymd(d){return ""+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());}
+function isoToExp(v){return v.replace(/-/g,"");}
+function expToIso(e){return e.slice(0,4)+"-"+e.slice(4,6)+"-"+e.slice(6,8);}
+function expTxt(e){return e.slice(6,8)+"/"+e.slice(4,6)+"/"+e.slice(0,4);}
+function dias(e){var a=new Date(+e.slice(0,4),+e.slice(4,6)-1,+e.slice(6,8)),t=new Date();t.setHours(0,0,0,0);return Math.round((a-t)/86400000);}
+function addM(base,m){var d=new Date(base.getTime()),dd=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+m);var last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(dd,last));return d;}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];}}
+function save(a){try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){alert("No se pudo guardar en este navegador. Usa Guardar copia.");}}
+var data=load(),filter="todas";
+function estado(r){var d=dias(r.exp);
+if(r.inactive)return{k:"ga",t:"Inactiva",g:"ina"};
+if(d<0)return{k:"er",t:"Vencida",g:"ven"};
+if(d<=30)return{k:"wa",t:"Vence en "+d+(d===1?" dia":" dias"),g:"por"};
+return{k:"ok",t:"Activa",g:"act"};}
+function cleanUser(v){return v.trim().replace(/\s+/g," ").toUpperCase();}
+function okUser(v){return /^[A-Z0-9 ._@-]+$/.test(v);}
+function render(){
+var c={act:0,por:0,ven:0,ina:0,pru:0};data.forEach(function(r){var g=estado(r).g;if(g==="por")c.act++;c[g]++;if((r.tipo||"D")==="P")c.pru++;});
+var defs=[["todas","Todas",data.length],["act","Activas",c.act],["ven","Vencidas",c.ven],["ina","Inactivas",c.ina],["pru","Pruebas",c.pru]];
+$("stats").innerHTML=defs.map(function(d){return '<button class="stat'+(filter===d[0]?" on":"")+'" data-f="'+d[0]+'"><b>'+d[2]+'</b><span>'+d[1]+(d[0]==="act"&&c.por?" ("+c.por+" por vencer)":"")+'</span></button>';}).join("");
+var q=$("q").value.trim().toUpperCase();
+var list=data.filter(function(r){var g=estado(r).g;
+if(filter==="act"&&g!=="act"&&g!=="por")return false;
+if(filter==="ven"&&g!=="ven")return false;
+if(filter==="ina"&&g!=="ina")return false;
+if(filter==="pru"&&(r.tipo||"D")!=="P")return false;
+if(q&&(r.user+" "+(r.nota||"")).toUpperCase().indexOf(q)<0)return false;return true;});
+list.sort(function(a,b){return a.user<b.user?-1:1;});
+$("cnt").textContent=list.length+" de "+data.length;
+if(!list.length){$("rows").innerHTML='<tr><td colspan="5" class="empty">'+(data.length?"No hay licencias con ese filtro.":"Todavia no generaste ninguna licencia.")+'</td></tr>';return;}
+$("rows").innerHTML=list.map(function(r){var e=estado(r),i=data.indexOf(r);
+return '<tr><td><div class="nm">'+esc(r.user)+'</div>'+(r.nota?'<div class="nt">'+esc(r.nota)+'</div>':'')+'</td><td>'+(r.tipo==="P"?"<span class='badge b-wa'>Prueba</span> ":"")+(r.mode==="E"?"Atada a equipo<div class=\'nt\'>"+esc(r.eq)+"</div>":"Libre")+'</td><td>'+expTxt(r.exp)+'</td><td><span class="badge b-'+e.k+'">'+e.t+'</span></td><td><div class="act"><button class="btn s" data-a="copy" data-i="'+i+'">Clave</button><button class="btn s" data-a="ren" data-i="'+i+'">Renovar</button><button class="btn s" data-a="tog" data-i="'+i+'">'+(r.inactive?"Activar":"Desactivar")+'</button><button class="btn s d" data-a="del" data-i="'+i+'">Borrar</button></div></td></tr>';}).join("");}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":s;return d.innerHTML;}
+function copyTxt(t,btn){function ok(){if(btn){var o=btn.textContent;btn.textContent="Copiado";setTimeout(function(){btn.textContent=o;},1200);}}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fb(t);ok();});}else{fb(t);ok();}}
+function fb(t){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(a);}
+function mensaje(r){return "Tu licencia "+(r.tipo==="P"?"de PRUEBA ":"")+"de AGRIMENSURA PRO\nUsuario: "+r.user+"\nClave: "+r.clave+"\nVence: "+expTxt(r.exp)+"\n\nAl usar cualquier comando del programa se abre una ventana: escribi el usuario y la clave tal como estan aca y apreta Aceptar.";}
+var last=null;
+$("t").onchange=function(){$("eqw").style.display=this.value==="E"?"block":"none";};
+function addD(n){var d=new Date();d.setDate(d.getDate()+n);return d;}
+$("quick").onclick=function(e){var m=e.target.getAttribute("data-m"),dd=e.target.getAttribute("data-dd");if(m)$("f").value=iso(addM(new Date(),+m));if(dd)$("f").value=iso(addD(+dd));};
+$("p").onchange=function(){$("f").value=this.value==="P"?iso(addD(15)):iso(addM(new Date(),12));};
+$("quick2").onclick=function(e){var m=e.target.getAttribute("data-m"),dd=e.target.getAttribute("data-dd");if(m)$("rnF").value=iso(addM(new Date(),+m));if(dd)$("rnF").value=iso(addD(+dd));};
+$("f").value=iso(addM(new Date(),12));
+$("bGen").onclick=function(){
+$("err").textContent="";
+var u=cleanUser($("u").value),tipo=$("p").value,mode=$("t").value,eq=$("eq").value.trim().toUpperCase(),f=$("f").value;
+if(!u){$("err").textContent="Escribi el usuario.";return;}
+if(!okUser(u)){$("err").textContent="El usuario solo puede tener letras sin tilde ni enie, numeros, espacio y . _ @ -";return;}
+if(!f){$("err").textContent="Elegi la fecha de vencimiento.";return;}
+var exp=isoToExp(f);
+if(dias(exp)<0){$("err").textContent="La fecha de vencimiento ya paso.";return;}
+if(mode==="E"&&!/^[A-HJ-NP-Z2-9]{6}-[A-HJ-NP-Z2-9]{6}$/.test(eq)){$("err").textContent="El ID del equipo tiene que ser como XXXXXX-XXXXXX (copialo de la ventana LIC).";return;}
+var idx=-1;data.forEach(function(r,i){if(r.user===u&&(r.tipo||"D")===tipo)idx=i;});
+if(idx>=0&&!confirm("Ya existe una licencia "+(tipo==="P"?"de prueba ":"")+"de "+u+". Se reemplaza por esta. Continuar?"))return;
+var rec={user:u,tipo:tipo,mode:mode,eq:mode==="E"?eq:"",exp:exp,nota:$("n").value.trim(),inactive:false,creada:ymd(new Date()),clave:clave(u,exp,mode,eq,tipo)};
+if(idx>=0){rec.creada=data[idx].creada;data[idx]=rec;}else data.push(rec);
+save(data);last=rec;
+$("rU").textContent=rec.user;$("rC").textContent=rec.clave;$("rV").textContent=expTxt(rec.exp);$("res").className="res show";$("msgOk").textContent="";
+render();};
+$("bMsg").onclick=function(){if(last){copyTxt(mensaje(last));$("msgOk").textContent="Mensaje copiado";}};
+document.addEventListener("click",function(e){var t=e.target;
+var c=t.getAttribute&&t.getAttribute("data-copy");if(c){copyTxt($(c).textContent,t);return;}
+var f=t.closest&&t.closest(".stat");if(f){filter=f.getAttribute("data-f");render();return;}
+var a=t.getAttribute&&t.getAttribute("data-a");if(!a)return;var r=data[+t.getAttribute("data-i")];if(!r)return;
+if(a==="copy"){copyTxt(mensaje(r),t);}
+if(a==="tog"){r.inactive=!r.inactive;save(data);render();}
+if(a==="del"){if(confirm("Borrar a "+r.user+" de la lista? (La clave que ya entregaste sigue funcionando hasta que venza.)")){data.splice(data.indexOf(r),1);save(data);render();}}
+if(a==="ren"){ren=r;$("rnU").textContent=r.user+" (vence "+expTxt(r.exp)+")";$("rnF").value=r.tipo==="P"?iso(addD(15)):iso(addM(new Date(Math.max(Date.now(),new Date(expToIso(r.exp)+"T00:00:00").getTime())),12));$("rnE").textContent="";$("dRen").showModal();}});
+var ren=null;
+$("rnC").onclick=function(){$("dRen").close();};
+$("rnOk").onclick=function(){var f=$("rnF").value;if(!f){$("rnE").textContent="Elegi la fecha.";return;}var exp=isoToExp(f);if(dias(exp)<0){$("rnE").textContent="La fecha ya paso.";return;}
+ren.exp=exp;ren.inactive=false;ren.clave=clave(ren.user,exp,ren.mode,ren.eq,ren.tipo||"D");save(data);last=ren;
+$("rU").textContent=ren.user;$("rC").textContent=ren.clave;$("rV").textContent=expTxt(ren.exp);$("res").className="res show";$("msgOk").textContent="";
+$("dRen").close();render();window.scrollTo({top:0,behavior:"smooth"});};
+$("q").oninput=render;
+$("bExp").onclick=function(){var b=new Blob([JSON.stringify(data,null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="licencias_agrimensura_"+ymd(new Date())+".json";document.body.appendChild(a);a.click();document.body.removeChild(a);};
+$("bImp").onclick=function(){$("fImp").click();};
+$("fImp").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var a=JSON.parse(rd.result);if(!Array.isArray(a))throw 0;
+a.forEach(function(n){if(!n||!n.user||!n.exp)return;var i=-1;data.forEach(function(r,k){if(r.user===n.user&&(r.tipo||"D")===(n.tipo||"D"))i=k;});if(i>=0)data[i]=n;else data.push(n);});
+save(data);render();alert("Copia cargada: "+a.length+" licencia(s).");}catch(e){alert("El archivo no es una copia valida.");}};rd.readAsText(f);this.value="";};
+
+/* iPhone: las descargas no funcionan en paginas publicadas; la copia se hace por portapapeles */
+$("bExp").onclick=function(){var t=JSON.stringify(data);function ok(){alert("Copia guardada en el portapapeles. Pegala en Notas o mandatela por WhatsApp.");}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){prompt("Copiá este texto:",t);});}else{prompt("Copiá este texto:",t);}};
+$("bImp").onclick=function(){var t=prompt("Pegá acá la copia que guardaste:");if(!t)return;try{var a=JSON.parse(t);if(!Array.isArray(a))throw 0;
+a.forEach(function(n){if(!n||!n.user||!n.exp)return;var i=-1;data.forEach(function(r,k){if(r.user===n.user&&(r.tipo||"D")===(n.tipo||"D"))i=k;});if(i>=0)data[i]=n;else data.push(n);});save(data);render();alert("Copia cargada: "+a.length+" licencia(s).");}catch(e){alert("El texto no es una copia válida.");}};
+function ub(x){var b=atob(x),a=new Uint8Array(b.length),i;for(i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
+function setSec(o){SECRET=o.D;SECRET_T=o.P;$("lock").style.display="none";}
+function unlock(){var pass=$("lp").value.trim().toUpperCase(),enc=new TextEncoder();$("le").textContent="";
+if(!pass||!window.crypto||!crypto.subtle){$("le").textContent=pass?"Este navegador no permite desbloquear (abrilo con https).":"Escribi la contrasena.";return;}
+$("lb").disabled=true;$("lb").textContent="Verificando...";
+crypto.subtle.importKey("raw",enc.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(k){
+return crypto.subtle.deriveKey({name:"PBKDF2",salt:ub(BLOB.s),iterations:BLOB.n,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["decrypt"]);})
+.then(function(k){return crypto.subtle.decrypt({name:"AES-GCM",iv:ub(BLOB.i)},k,ub(BLOB.c));})
+.then(function(p){var o=JSON.parse(new TextDecoder().decode(p));setSec(o);
+if($("lr").checked){try{localStorage.setItem(SKEY,JSON.stringify(o));}catch(e){}}})
+.catch(function(){$("le").textContent="Contrasena incorrecta.";})
+.then(function(){$("lb").disabled=false;$("lb").textContent="Entrar";});}
+$("lb").onclick=unlock;$("lp").onkeydown=function(e){if(e.key==="Enter")unlock();};
+try{var sv=JSON.parse(localStorage.getItem(SKEY)||"null");if(sv&&sv.D&&sv.P)setSec(sv);}catch(e){}
+render();
+</script>
+</body>
+</html>
